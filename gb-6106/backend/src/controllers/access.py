@@ -31,5 +31,15 @@ def require_role(role):
     return authorize
 
 
+def require_any(*roles):
+    def authorize(user=Depends(identity)):
+        if user["role"] not in roles:
+            raise HTTPException(403, "当前账号没有此操作权限")
+        return user
+
+    return authorize
+
+
 operator = require_role(Role.OPERATOR)
 reviewer = require_role(Role.REVIEWER)
+shift_pair = require_any(Role.OPERATOR, Role.REVIEWER)

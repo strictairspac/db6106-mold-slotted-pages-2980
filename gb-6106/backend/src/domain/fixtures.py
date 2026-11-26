@@ -28,4 +28,37 @@ FIXTURES = [
             ]
         },
     },
+    {
+        "code": "GM-C4-P08D",
+        "title": "C4 三号模具白班变更单",
+        "description": "白班：首件入页、撤销传感器空跑、补记裂纹复测，已完工。",
+        "payload": {
+            "operations": [
+                {"op": "insert", "key": "GM-071", "note": "06:50 C4#03 首件合格；模温 184C"},
+                {"op": "insert", "key": "GM-072", "note": "06:52 C4#03 空跑，传感器抖动"},
+                {"op": "delete", "key": "GM-072"},
+                {"op": "update", "key": "GM-071", "note": "06:50 C4#03 首件合格；模温 184C。08:15 裂纹复测通过，主管盖印。"},
+            ]
+        },
+    },
+    {
+        "code": "GM-C4-P08N",
+        "title": "C4 三号模具夜班变更单",
+        "description": "夜班：复录同一首件编号并补记保压巡检，已完工。",
+        "payload": {
+            "operations": [
+                {"op": "insert", "key": "GM-071", "note": "18:40 C4#03 夜班复录首件，模温 186C"},
+                {"op": "insert", "key": "GM-075", "note": "19:05 C4#03 保压巡检正常"},
+            ]
+        },
+    },
 ]
+
+# 演示交班合单：白班单与夜班单都已完工且页容量相同，GM-071 两边都动过，待取舍。
+MERGE_FIXTURE = {
+    "code": "MERGE-GM-C4-P08",
+    "title": "C4 三号模具昼夜交班合单",
+    "day": "GM-C4-P08D",
+    "night": "GM-C4-P08N",
+    "parameter": 192,
+}
